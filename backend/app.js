@@ -1,6 +1,22 @@
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const schema = require("./schema/schema");
+const mongoose = require("mongoose");
+
+require("dotenv").config();
+
+const port = process.env.PORT || 4000;
+
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
+const connection = mongoose.connection;
+connection.once("open", () => {
+  console.log("MongoDB database connection established successfully");
+});
 
 const app = express();
 
@@ -12,6 +28,6 @@ app.use(
   })
 );
 
-app.listen(4000, () => {
-  console.log("now listening for requests on port 4000");
+app.listen(port, () => {
+  console.log(`Now listening for requests on port ${port}`);
 });
