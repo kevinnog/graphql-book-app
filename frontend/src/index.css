@@ -15,7 +15,7 @@ body {
   height: 100%;
 }
 
-#book-lis {
+#book-list {
   padding: 0;
 }
 
@@ -30,13 +30,30 @@ body {
   color: #880e4f;
 }
 
-form {
+#forms {
+  position: fixed;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+#add-book {
   background: #fff;
   padding: 20px;
   position: fixed;
   left: 0;
   bottom: 0;
-  width: 400px;
+  width: 350px;
+}
+
+#add-author {
+  background: #fff;
+  padding: 20px;
+  position: fixed;
+  left: 410px;
+  bottom: 0;
+  width: 350px;
+  height: 117px;
 }
 
 form .field {
@@ -82,4 +99,12 @@ form button {
   box-shadow: -2px -3px 5px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   color: #fff;
+}
+
+.swal-button {
+  background-color: #880e4f;
+}
+
+.swal-overlay {
+  background-color: rgba(173, 20, 87, 0.3);
 }

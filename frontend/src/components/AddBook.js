@@ -6,6 +6,7 @@ import {
   addBookMutation,
   getBooksQuery,
 } from "../queries/queries";
+import swal from "sweetalert";
 
 class AddBook extends Component {
   constructor(props) {
@@ -38,14 +39,31 @@ class AddBook extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addBookMutation({
-      variables: {
-        name: this.state.name,
-        genre: this.state.genre,
-        authorId: this.state.authorId,
-      },
-      refetchQueries: [{ query: getBooksQuery }],
-    });
+
+    let name = this.state.name;
+    let genre = this.state.genre;
+    let authorId = this.state.authorId;
+
+    if (name !== "" && genre !== "" && authorId !== "") {
+      this.props.addBookMutation({
+        variables: {
+          name: name,
+          genre: genre,
+          authorId: authorId,
+        },
+        refetchQueries: [{ query: getBooksQuery }],
+      });
+      let form = document.getElementById("add-book");
+      form.reset();
+      swal("Good job!", "Book sucessfully added", "success");
+      this.setState({
+        name: "",
+        genre: "",
+        authorId: "",
+      });
+    } else {
+      return swal("Error", "Name/genre/author not informed!", "error");
+    }
   }
 
   render() {
